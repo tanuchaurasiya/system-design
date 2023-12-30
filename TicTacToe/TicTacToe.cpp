@@ -33,66 +33,49 @@ class TicTacToe{
                 else{
                     player = player==0 ? -1 : +1;
                     board[row][col] = player;
-                    // FOR ROW
-                    bool win = true; 
+                    
+                    bool rowWin = true, colWin=true, diaWin=true, revDiaWin=true; 
                     for(int i=0;i<N;i++){
                         if(board[row][i]!=player){
-                            win = false;
-                            break;
-                        }
-                    } 
-                    if(win) return player;  
-                    
-                    
-                    // FOR COLUMN 
-                    win = true;
-                    for(int i=0;i<N;i++){
+                            rowWin = false;
+                        } 
+                        
                         if(board[i][col]!=player){
-                            win = false;
-                            break;
+                            colWin = false;
+                        } 
+                        
+                        if(row==col){
+                            if(board[i][i]!=player)
+                                diaWin = false;
+                        } 
+                        else{
+                            diaWin = false;
+                        }
+                        
+                        if(row==N-col-1){ 
+                            if(board[i][N-i-1]!=player)
+                                revDiaWin = false;
+                        } 
+                        else{
+                            revDiaWin=false;
                         }
                     } 
-                    if(win) return player; 
                     
-                    
-                    // FOR DIAGONAL 
-                    win = true;
-                    if(row==col){
-                        for(int i=0;i<N;i++){
-                            if(board[i][i]!=player){
-                                win = false;
-                                break;
-                            }
-                        } 
-                        if(win) return player;
-                    }
-                    
-                    
-                    
-                    // FOR  REVERSE DIAGONAL 
-                    win = true;
-                    if(row==N-col-1){
-                        for(int i=0;i<N;i++){
-                            if(board[i][N-i-1]!=player){
-                                win = false;
-                                break;
-                            }
-                        } 
-                        if(win) return player;
-                    } 
-                    
+                    // cout<<rowWin<<" "<<colWin<<" "<<diaWin<<" "<<revDiaWin<<endl;
+                    if(rowWin || colWin || diaWin || revDiaWin) return player;  
                 }
+                
             }
             catch(CustomException& s){   
                 cout<<s.what()<<endl; 
                 return 2;
             }  
-             return 0;
+            return 0;
         }
 };
 int main()
 {
-    cout<<"LETS PLAY TICTACTOE\n";
+    cout<<"Hello World\n";
     TicTacToe t(3); 
     int row;
     int col;
@@ -131,6 +114,3 @@ int main()
     }
     return 0;
 }
-
-
-
